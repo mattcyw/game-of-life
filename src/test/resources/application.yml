@@ -1,0 +1,16 @@
+# spring framework settings
+spring:
+  main:
+    banner-mode: "off"
+
+# application settings
+gol:
+
+  # define the grid size and number of generations to simulate
+  width: 200
+  height: 200
+  generations: 100
+
+  # choose how the live cells are ordered in the output JSON for each generation
+  # options: "simple" | "slot-preserving"
+  sorting-strategy: "slot-preserving" 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!--
+  This includes Spring Boot's base config.
+  If logging.file.name is set, base.xml will define a FILE appender
+  with TimeBasedRollingPolicy and SizeBasedTriggeringPolicy automatically,
+  using properties like logging.file.max-size, logging.rollingpolicy.max-history etc.
+  -->
+  <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+  <!-- You can still customize appenders, but make sure they don't clash -->
+
+  <root level="INFO">
+    <appender-ref ref="FILE"/> <!-- Reference the FILE appender defined by base.xml -->
+  </root>
+
+  <logger name="com.example.bgl.gol" level="DEBUG" additivity="false">
+    <appender-ref ref="FILE"/>
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+
+  <logger name="org.springframework" level="INFO" additivity="false">
+    <appender-ref ref="FILE"/>
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+
+</configuration>

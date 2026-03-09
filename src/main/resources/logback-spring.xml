@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!--
+  This includes Spring Boot's base config.
+  If logging.file.name is set, base.xml will define a FILE appender
+  with TimeBasedRollingPolicy and SizeBasedTriggeringPolicy automatically,
+  using properties like logging.file.max-size, logging.rollingpolicy.max-history etc.
+  -->
+  <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+  <!-- You can still customize appenders, but make sure they don't clash -->
+
+  <!-- <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        <level>WARN</level>
+    </filter>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender> -->
+
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        <level>DEBUG</level>
+    </filter>
+    <file>logs/gol.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>logs/game-of-life.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <maxHistory>3</maxHistory>
+      <totalSizeCap>10MB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="FILE"/>
+  </root>
+
+  <logger name="com.example.bgl.gol" level="DEBUG" additivity="false">
+    <appender-ref ref="FILE"/>
+  </logger>
+
+  <logger name="org.springframework" level="WARN" additivity="false">
+    <appender-ref ref="FILE"/>
+  </logger>
+
+</configuration>
